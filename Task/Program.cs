@@ -5,44 +5,28 @@
 // Примеры:
 // ["hello", "2", "world", ":-)"=-> ["2", ":-)"]
 // ["1234", "1567", "-2", "computer science"] -> ["-2"]
-// ["Russia", "Denmark", "Kazan"] -> []
-
-
+// ["Russia", "Denmark", "Kazan"] -> [
 using System;
-using static System.Console;
+ 
+string[] array =
+{
+    "a",
+    "bb",
+    "ccc",
+    "dddd",
+    "eeeee",
+    "z"
+};
 
-Clear();
-
-string[] array = AskArray();
-string[] result = FindLessThan(array, 3);
-WriteLine($"[{string.Join(", ", array)}] -> [{string.Join(", ", result)}]");
-
-string[] FindLessThan(string[] input, int n) {
-    string[] output = new string[CountLessThan(input, n)];
-
-    for(int i = 0, j = 0; i < input.Length; i++) {
-        if(input[i].Length <= n) {
-            output[j] = input[i];
-            j++;
-        }
+var result = new string[array.Length];
+var realSize = 0;
+foreach (var value in array)
+{
+    if (value.Length <= 3)
+    {
+        result[realSize] = value;
+        realSize++;
     }
-
-    return output;
 }
 
-int CountLessThan(string[] input, int n) {
-    int count = 0;
-
-    for(int i = 0; i < input.Length; i++) {
-        if(input[i].Length <= n) {
-            count++;
-        }
-    }
-
-    return count;
-}
-
-string[] AskArray() {
-    Write("Введите значения через пробел: ");
-    return ReadLine().Split(" ");
-}
+Console.WriteLine(string.Join(Environment.NewLine, result, 0, realSize));
